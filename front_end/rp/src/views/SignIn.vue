@@ -1,6 +1,8 @@
 <template>
   <div class="signIn">
-    <div class="spacer"></div>
+    <Login v-if="user"/>
+    <Login v-else/>
+    <!-- <div class="spacer"></div>
     <div class="signInFlexBox">
       <div class="signInBox">
           <div id="f9">
@@ -18,9 +20,35 @@
         </div>
       </div>
       </div>
-    </div>
+    </div> -->
+
   </div>
 </template>
+
+<script>
+import Login from '@/components/Login.vue';
+import axios from 'axios';
+export default {
+  name: 'dashboard',
+  components: {
+    Login,
+  },
+  async created() {
+    try {
+      let response = await axios.get('/api/users');
+      this.$root.$data.user = response.data.user;
+    } catch (error) {
+      this.$root.$data.user = null;
+    }
+  },
+  computed: {
+    user() {
+      return this.$root.$data.user;
+    }
+  }
+}
+
+</script>
 
 <style scoped>
 #f9{

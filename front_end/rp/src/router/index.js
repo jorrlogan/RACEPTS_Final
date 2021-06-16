@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import AboutRP from "../views/AboutRP";
 import Races from "../views/Races.vue"
 import SignIn from "../views/SignIn"
+import Dashboard from '../views/Dashboard.vue'
 //import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
@@ -17,6 +18,11 @@ const routes = [
     path: '/SignIn',
     name: 'SignIn',
     component: SignIn
+  },
+   {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
   },
   {
     path: "/about",

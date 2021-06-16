@@ -32,9 +32,11 @@
         </div>
       </div>
     </nav>
+    <div class="spacer"></div>
     <router-view />
+    <div class="spacer"></div>
     <div id="specialFooter">
-      <p>github / number of hours</p>
+      <p><a href="https://github.com/jorrlogan/RACEPTS_Final.git">github / number of hours</a></p>
     </div>
   </div>
 </template>
@@ -42,6 +44,10 @@
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 
+
+.spacer{
+  height: 8em;
+}
 .nav-link{
   color: white !important;
 }
@@ -52,10 +58,10 @@
 .navbar {
   display: flex !important;
   justify-content: space-between !important;
-  background-color: rgba(56, 56, 56, 0.7) !important;
+  background-color: rgba(56, 56, 56, 1) !important;
   color: white !important;
   margin-top: 2%;
-  position: sticky;
+  position: fixed;
   width: 100%;
   margin-bottom: 2%;
 }
@@ -94,12 +100,15 @@
 }
 
 #specialFooter {
-  position: fixed;
+  position:fixed;
   bottom: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding-top: 1%;
   width: 100%;
   height: 50px;
+  background-color: rgba(56, 56, 56, 1) !important;
 }
 * {
   color: white;
@@ -114,7 +123,8 @@ body {
   background-repeat: no-repeat;
   /*background-size: cover;*/
   background-position: center;
-  background-size: cover;
+  background-size:cover;
+  background-repeat: repeat;
   height: 750px; /* use media queries to change the background image size*/
 }
 #app {

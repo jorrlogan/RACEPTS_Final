@@ -37,9 +37,13 @@ app.get('/api/races', async (req,res) => {
         console.log(error);
         res.sendStatus(500);
     }
-})
+});
 
-app.listen(3000, () => console.log('Server listening on port 3000!'));
+// import the users module and setup its API path
+const users = require("./users.js");
+app.use("/api/users", users.routes);
+
+app.listen(3001, () => console.log('Server listening on port 3001!'));
 
 
 

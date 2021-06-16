@@ -21,11 +21,10 @@
 }
 
 #RPDescription{
-  margin-top: 4%;
   width: 100%; 
   display: flex;
   justify-content: center;
-  padding: 4%;
+  padding: 1%;
 }
 
 #insideRPDescriptionDiv{

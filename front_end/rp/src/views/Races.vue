@@ -36,15 +36,6 @@ export default {
         console.log(error);
       }
     },
-    // async deleteTicket(ticket) {
-    //   try {
-    //     await axios.delete("/api/tickets/" + ticket.id);
-    //     this.getTickets();
-    //     return true;
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
   },
 };
 </script>
