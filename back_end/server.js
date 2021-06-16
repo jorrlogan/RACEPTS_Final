@@ -1,47 +1,43 @@
+
 const express = require('express');
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 
+// setup express
 const app = express();
+
+// setup body parser middleware to conver to JSON and handle URL encoded forms
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-const mongoose = require('mongoose');
-
-// connect to the database
+// connect to the mongodb database
 mongoose.connect('mongodb://localhost:27017/races', {
   useUnifiedTopology: true,
   useNewUrlParser: true
 });
 
-const raceSchema = new mongoose.Schema({
-    name: String,
-    price: String,
-    date: String,
-});
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
-raceSchema.virtual('id').get(function(){
-    return this._id.toHexString();
-});
-
-raceSchema.set('toJSON',{virtuals: true});
-
-const Race = mongoose.model('Race', raceSchema);
-
-app.get('/api/races', async (req,res) => {
-    try{
-        let races = await Race.find();
-        res.send({races: races});
-    } catch(error){
-        console.log(error);
-        res.sendStatus(500);
-    }
-});
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  keys: [
+    'secretValue'
+  ],
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
+}));
 
 // import the users module and setup its API path
 const users = require("./users.js");
 app.use("/api/users", users.routes);
+
+const races = require("./races.js");
+app.use("api/races", races.routes);
 
 app.listen(3001, () => console.log('Server listening on port 3001!'));
 

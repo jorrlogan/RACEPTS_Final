@@ -1,6 +1,6 @@
 <template>
   <div class="signIn">
-    <Login v-if="user"/>
+    <MyPhotos v-if="user"/>
     <Login v-else/>
     <!-- <div class="spacer"></div>
     <div class="signInFlexBox">
@@ -27,11 +27,13 @@
 
 <script>
 import Login from '@/components/Login.vue';
+import MyPhotos from '@/components/MyPhotos.vue';
 import axios from 'axios';
 export default {
   name: 'dashboard',
   components: {
     Login,
+    MyPhotos,
   },
   async created() {
     try {
