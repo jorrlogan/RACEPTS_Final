@@ -1,54 +1,73 @@
 <template>
-<div class="main">
-     <h1>Profile</h1>
-<div class="profileDiv">
-    <div class="profileDiv2">
-        <div>
-            <h4>Information:</h4>
-        <p>First Name: {{user.firstName}}</p>
-      <p></p>
-      <p>Last Name: {{user.lastName}}</p>
-      <p></p>
-      <p>Username : {{user.username}}</p>
+  <div class="main">
+    <h1>Profile</h1>
+    <div class="profileDiv">
+      <div class="profileDiv2">
+        <div class="profileDiv4">
+          <h4>Information:</h4>
+          <p>First Name: {{ user.firstName }}</p>
+          <p></p>
+          <p>Last Name: {{ user.lastName }}</p>
+          <p></p>
+          <p>Username : {{ user.username }}</p>
         </div>
-    </div>
-     <div class="profileDiv2">
-        <div>
-            <h4>Registered Races:</h4>
-        <p>First Name: {{user.firstName}}</p>
-      <p></p>
-      <p>Last Name: {{user.lastName}}</p>
-      <p></p>
-      <p>Username : {{user.username}}</p>
+        <div class="profileDiv5">
+          <h4>Race PTS:</h4>
+          <p>{{ user.points }}</p>
         </div>
-    </div>
+      </div>
+      <div class="profileDiv3">
+        <div>
+          <h4>Registered Races:</h4>
+          <div
+            v-for="race in this.$root.$data.user.races"
+            v-bind:key="race"
+          ></div>
+          <div v-if="user.races.length < 1">
+            <p>none</p>
+          </div>
+          <div v-else>
+            <div v-for="racer in user.races" v-bind:key="racer._id">
+              <div class="raceBoxDiv">
+                <div class="raceBoxDiv2">
+                <p>{{ racer.name }}</p>
+                </div>
+                <div>
+                <p>{{ racer.date }}</p>
+                </div>
+                <div>
+                <p>{{ racer.price }}</p>
+                </div>
+                <button onClick="history.go(0)" @click="removeRace(racer)">X</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="profileDiv2">
+      <!-- <div class="profileDiv2">
         <div>
-            <h4>Race PTS:</h4>
-        <p>First Name: {{user.firstName}}</p>
-      <p></p>
-      <p>Last Name: {{user.lastName}}</p>
-      <p></p>
-      <p>Username : {{user.username}}</p>
+          <h4>Race PTS:</h4>
+          <p>{{ user.points }}</p>
         </div>
+      </div> -->
     </div>
-</div>
-  <div class="menu">
-
-    <p><a><i class="fas fa-image"></i></a></p>
-    <!--<h2>{{user.firstName}} {{user.lastName}} <a @click="logout"><i class="fas fa-sign-out-alt"></i></a></h2>-->
-    <button @click="logout">log out</button>
+    <div class="menu">
+      <p>
+        <a><i class="fas fa-image"></i></a>
+      </p>
+      <!--<h2>{{user.firstName}} {{user.lastName}} <a @click="logout"><i class="fas fa-sign-out-alt"></i></a></h2>-->
+      <button id="logout" @click="logout">log out</button>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'MyPhotos',
+  name: "MyPhotos",
   data() {
-    return {}
+    return {};
   },
   computed: {
     user() {
@@ -56,6 +75,19 @@ export default {
     },
   },
   methods: {
+    async removeRace(racer){
+       try{
+         await axios.put('/api/users/remove', {
+           id: this.$root.$data.user.id,
+           race: racer,
+         });
+         return true;
+        
+       }catch(error){
+          console.log(error);
+       }
+     },
+
     async logout() {
       try {
         await axios.delete("/api/users");
@@ -64,36 +96,79 @@ export default {
         this.$root.$data.user = null;
       }
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
 
-button{
-    color: white;
-    background-color: rgba(56, 56, 56, 0.9);
-    padding: 0.5%;
+.raceBoxDiv2 {
+  padding-right: 3%;
 }
 
-.profileDiv2{
-    width: 35%;
-    display: flex;
-    justify-content: flex-start;
-    background-color: rgba(56, 56, 56, 0.9);
-    padding: 2%;
-    margin: 2%
-
+.raceBoxDiv p {
+  text-align: left;
+}
+.raceBoxDiv {
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+  width: 100%;
 }
 
-.profileDiv{
-    display: flex;
-    justify-content: center;
-    width: 100%;
+button {
+  color: white;
+  background-color: rgba(56, 56, 56, 0.9);
+  padding: 0.5%;
 }
 
-i{
-    color: orange;
+#logout{
+   color: white;
+  background-color: rgba(56, 56, 56, 0.9);
+  padding: 0.5%;
+}
+
+.profileDiv4 p {
+  text-align: left;
+}
+
+.profileDiv4 {
+  background-color: rgba(56, 56, 56, 0.9);
+  width: 100%;
+  padding: 2%;
+}
+
+.profileDiv5 {
+  background-color: rgba(56, 56, 56, 0.9);
+  width: 100%;
+  padding: 2%;
+  margin-top: 10%;
+}
+
+.profileDiv3 {
+  width: 50%;
+  background-color: rgba(56, 56, 56, 0.9);
+  padding: 2%;
+  margin: 2%;
+}
+
+.profileDiv2 {
+  width: 35%;
+  /* display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap; */
+  /*background-color: rgba(56, 56, 56, 0.9);*/
+  padding: 2%;
+}
+
+.profileDiv {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+i {
+  color: orange;
 }
 .menu {
   display: flex;

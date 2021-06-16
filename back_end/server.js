@@ -36,8 +36,34 @@ app.use(cookieSession({
 const users = require("./users.js");
 app.use("/api/users", users.routes);
 
-const races = require("./races.js");
-app.use("api/races", races.routes);
+// const races = require("./races.js");
+// app.use("/api/races", races.routes);
+
+const raceSchema = new mongoose.Schema({
+    name: String,
+    price: String,
+    date: String,
+});
+
+raceSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+raceSchema.set('toJSON',{virtuals: true});
+
+const Race = mongoose.model('Race', raceSchema);
+
+app.get('/api/races', async (req,res) => {
+    try{
+        let races = await Race.find();
+        res.send({races: races});
+    } catch(error){
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+
 
 app.listen(3001, () => console.log('Server listening on port 3001!'));
 

@@ -25,6 +25,9 @@
             <li class="nav-item">
               <router-link to="/Races" class="nav-link">Races</router-link>
             </li>
+             <li class="nav-item">
+              <router-link to="/Profile" class="nav-link">Profile</router-link>
+            </li>
             <li class="nav-item">
               <router-link to="/SignIn" class="nav-link">Sign In</router-link>
             </li>
@@ -36,7 +39,7 @@
     <router-view />
     <div class="spacer"></div>
     <div id="specialFooter">
-      <p><a href="https://github.com/jorrlogan/RACEPTS_Final.git">github / number of hours</a></p>
+      <p><a href="https://github.com/jorrlogan/RACEPTS_Final.git">github / 20-30ish hours</a></p>
     </div>
   </div>
 </template>
@@ -44,6 +47,10 @@
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 
+a{
+  text-decoration: none;
+  color: white;
+}
 
 .spacer{
   height: 8em;
@@ -60,7 +67,6 @@
   justify-content: space-between !important;
   background-color: rgba(56, 56, 56, 1) !important;
   color: white !important;
-  margin-top: 2%;
   position: fixed;
   width: 100%;
   margin-bottom: 2%;

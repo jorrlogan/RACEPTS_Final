@@ -1,13 +1,13 @@
 <template>
   <div class="Races">
     <h2>Races</h2>
-    <div v-for="race in this.races" v-bind:key="race.id">
+    <div v-for="race in this.races" v-bind:key="race">
       <div id="raceDiv">
         <div class="raceBoxDiv">
           <p>{{ race.name }}</p>
           <p>{{ race.date }}</p>
           <p>{{ race.price }}</p>
-          <button>Register</button>
+          <button v-on:click="addRace(race)">Register</button>
         </div>
       </div>
     </div>
@@ -27,6 +27,19 @@ export default {
     this.getRaces();
   },
   methods: {
+     async addRace(race){
+       try{
+         await axios.put('/api/users/', {
+           id: this.$root.$data.user.id,
+           race: race,
+         });
+         return true;
+        
+       }catch(error){
+          console.log(error);
+       }
+     },
+
     async getRaces() {
       try {
         let response = await axios.get("/api/races");

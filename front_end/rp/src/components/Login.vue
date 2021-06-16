@@ -3,7 +3,7 @@
   <div class="heroBox">
     <form class="pure-form">
       <fieldset>
-        <legend>Register for an account</legend>
+        <legend class="legend">Register for an account</legend>
         <input placeholder="first name" v-model="firstName">
         <input placeholder="last name" v-model="lastName">
       </fieldset>
@@ -18,7 +18,7 @@
     <p v-if="error" class="error">{{error}}</p>
     <form class="pure-form space-above">
       <fieldset>
-        <legend>Login</legend>
+        <legend class="legend">Login</legend>
         <input placeholder="username" v-model="usernameLogin">
         <input type="password" placeholder="password" v-model="passwordLogin">
       </fieldset>
@@ -41,6 +41,7 @@ export default {
       lastName: '',
       username: '',
       password: '',
+      points: 0,
       usernameLogin: '',
       passwordLogin: '',
       error: '',
@@ -59,6 +60,7 @@ export default {
           lastName: this.lastName,
           username: this.username,
           password: this.password,
+          points: this.points,
         });
         this.$root.$data.user = response.data.user;
       } catch (error) {
@@ -85,7 +87,20 @@ export default {
   },
 }
 </script>
+
 <style scoped>
+
+.legend{
+  font-size: x-large !important;
+}
+
+button{
+  color: white;
+  background-color: rgba(56, 56, 56, 0.7);
+  padding: 1%;
+  margin: 2%;
+}
+
 .space-above {
   margin-top: 50px;
 }
@@ -103,6 +118,8 @@ h1 {
 
 .heroBox {
   text-align: center;
+  background-color: rgba(56, 56, 56, 0.7);
+  padding: 2%;
 }
 
 .hero form {
@@ -115,6 +132,7 @@ h1 {
 
 input {
   margin-right: 10px;
+  color: rgba(56, 56, 56, 1);
 }
 
 .error {
