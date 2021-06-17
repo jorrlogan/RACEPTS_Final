@@ -39,7 +39,7 @@
     <router-view />
     <div class="spacer"></div>
     <div id="specialFooter">
-      <p><a href="https://github.com/jorrlogan/RACEPTS_Final.git">github / 20-30ish hours</a></p>
+      <p><a href="https://github.com/jorrlogan/RACEPTS_Final.git">github / 20-25ish hours</a></p>
     </div>
   </div>
 </template>

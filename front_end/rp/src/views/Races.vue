@@ -6,7 +6,7 @@
         <div class="raceBoxDiv">
           <p>{{ race.name }}</p>
           <p>{{ race.date }}</p>
-          <p>{{ race.price }}</p>
+          <p>${{ race.price }}</p>
           <button v-on:click="addRace(race)">Register</button>
         </div>
       </div>

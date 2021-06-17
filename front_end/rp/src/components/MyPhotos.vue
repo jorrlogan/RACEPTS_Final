@@ -14,6 +14,7 @@
         <div class="profileDiv5">
           <h4>Race PTS:</h4>
           <p>{{ user.points }}</p>
+          <p>($100 Race Credit at 500 PTS)</p>
         </div>
       </div>
       <div class="profileDiv3">
@@ -36,11 +37,13 @@
                 <p>{{ racer.date }}</p>
                 </div>
                 <div>
-                <p>{{ racer.price }}</p>
+                <p>${{ racer.price }}</p>
                 </div>
                 <button onClick="history.go(0)" @click="removeRace(racer)">X</button>
               </div>
             </div>
+            <p>Total: ${{ user.points }}</p>
+            <router-link to="/Payment"><button>Pay</button></router-link>
           </div>
         </div>
       </div>
@@ -57,7 +60,7 @@
         <a><i class="fas fa-image"></i></a>
       </p>
       <!--<h2>{{user.firstName}} {{user.lastName}} <a @click="logout"><i class="fas fa-sign-out-alt"></i></a></h2>-->
-      <button id="logout" @click="logout">log out</button>
+     <button id="logout" @click="logout">log out</button>
     </div>
   </div>
 </template>

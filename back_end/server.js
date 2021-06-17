@@ -41,7 +41,7 @@ app.use("/api/users", users.routes);
 
 const raceSchema = new mongoose.Schema({
     name: String,
-    price: String,
+    price: Number,
     date: String,
 });
 

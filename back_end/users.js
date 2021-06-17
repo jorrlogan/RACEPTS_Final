@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema({
   lastName: String,
   username: String,
   password: String,
+  email: String,
+  age: Number,
+  gender: String,
   points: Number,
   races: Array,
 });
@@ -210,7 +213,13 @@ router.delete("/", validUser, async (req, res) => {
 router.put("/", validUser, async (req, res) => {
   try {
     let temp = await User.findOne({ _id: req.user._id });
+    for(let i = 0; i < temp.races.length; ++i){
+      if(temp.races[i].name === req.body.race.name){
+        return;
+      }
+    }
     temp.races.push(req.body.race);
+    temp.points += req.body.race.price;
     await temp.save();
     //res.send(temp);
     res.sendStatus(200);
@@ -228,6 +237,7 @@ router.put("/remove", validUser, async (req, res) => {
         temp.races.splice(i, 1);
       }
     }
+    temp.points -= req.body.race.price;
     await temp.save();
     res.sendStatus(200);
   } catch (error) {
