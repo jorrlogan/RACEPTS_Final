@@ -111,7 +111,7 @@ router.post("/", async (req, res) => {
     !req.body.firstName ||
     !req.body.lastName ||
     !req.body.username ||
-    !req.body.password
+    !req.body.password 
   )
     return res.status(400).send({
       message: "first name, last name, username and password are required",
@@ -135,6 +135,9 @@ router.post("/", async (req, res) => {
       username: req.body.username,
       password: req.body.password,
       points: req.body.points,
+      gender: req.body.gender,
+      age: req.body.age,
+      email: req.body.email,
     });
     await user.save();
     // set user session info

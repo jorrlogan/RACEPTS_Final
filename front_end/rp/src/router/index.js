@@ -6,11 +6,17 @@ import SignIn from "../views/SignIn"
 import Dashboard from '../views/Dashboard.vue'
 import Profile from '../views/Profile.vue'
 import Payment from '../views/Payment.vue'
+import Thankyou from '../views/Thankyou.vue'
 //import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+   {
+    path: "/Thankyou",
+    name: "Thankyou",
+    component: Thankyou,
+  },
   {
     path: "/AboutRP",
     name: "AboutRP",

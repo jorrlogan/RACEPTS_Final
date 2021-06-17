@@ -69,7 +69,7 @@ a{
   color: white !important;
   position: fixed;
   width: 100%;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
 }
 
 #racePTSStuff {
@@ -86,7 +86,7 @@ a{
 }
 
 #RPDescription {
-  margin-top: 4%;
+  margin-top: 2%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -113,7 +113,7 @@ a{
   align-items: center;
   padding-top: 1%;
   width: 100%;
-  height: 50px;
+  height: fit-content;
   background-color: rgba(56, 56, 56, 1) !important;
 }
 * {
@@ -130,7 +130,8 @@ body {
   /*background-size: cover;*/
   background-position: center;
   background-size:cover;
-  background-repeat: repeat;
+  background-repeat:no-repeat;
+  background-color: rgba(56, 56, 56, 1);
   height: 750px; /* use media queries to change the background image size*/
 }
 #app {
@@ -175,5 +176,11 @@ body {
   flex-wrap: none;
   justify-items: center;
   justify-content: center;
+}
+
+@media (min-width: 576px) {
+  body{
+  font-size: medium;
+  }
 }
 </style>

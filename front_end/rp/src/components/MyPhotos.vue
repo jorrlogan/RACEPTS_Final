@@ -10,6 +10,12 @@
           <p>Last Name: {{ user.lastName }}</p>
           <p></p>
           <p>Username : {{ user.username }}</p>
+          <p></p>
+          <p>Email : {{ user.email }}</p>
+          <p></p>
+          <p>Gender : {{ user.gender }}</p>
+          <p></p>
+          <p>Age : {{ user.age }}</p>
         </div>
         <div class="profileDiv5">
           <h4>Race PTS:</h4>
@@ -30,16 +36,16 @@
           <div v-else>
             <div v-for="racer in user.races" v-bind:key="racer._id">
               <div class="raceBoxDiv">
-                <div class="raceBoxDiv2">
+                <div class="raceBoxDiv2 widthDiv">
                 <p>{{ racer.name }}</p>
                 </div>
-                <div>
+                <div class="widthDiv">
                 <p>{{ racer.date }}</p>
                 </div>
-                <div>
+                <div class="widthDiv">
                 <p>${{ racer.price }}</p>
                 </div>
-                <button onClick="history.go(0)" @click="removeRace(racer)">X</button>
+                <button class="racerButton" onClick="history.go(0)" @click="removeRace(racer)">X</button>
               </div>
             </div>
             <p>Total: ${{ user.points }}</p>
@@ -47,13 +53,6 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="profileDiv2">
-        <div>
-          <h4>Race PTS:</h4>
-          <p>{{ user.points }}</p>
-        </div>
-      </div> -->
     </div>
     <div class="menu">
       <p>
@@ -107,6 +106,7 @@ export default {
 
 .raceBoxDiv2 {
   padding-right: 3%;
+  width: 100%;
 }
 
 .raceBoxDiv p {
@@ -115,6 +115,7 @@ export default {
 .raceBoxDiv {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 1%;
   width: 100%;
 }
@@ -179,7 +180,28 @@ i {
 }
 
 .menu h2 {
-  font-size: 14px;
   color: orange;
+}
+
+@media (max-width: 576px) {
+  .main{
+    font-size: small;
+  }
+
+  h4{
+    font-size: small;
+  }
+
+  button{
+    width: 100%;
+  }
+
+  .raceBoxDiv{
+    border-bottom: 2px solid black;
+  }
+
+  .widthDiv{
+    width: 100%;
+  }
 }
 </style>

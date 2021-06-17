@@ -1,66 +1,95 @@
 <template>
-<div class="hero">
-  <div class="heroBox">
-    <form class="pure-form">
-      <fieldset>
-        <legend class="legend">Register for an account</legend>
-        <input placeholder="first name" v-model="firstName">
-        <input placeholder="last name" v-model="lastName">
-      </fieldset>
-      <fieldset>
-        <input placeholder="username" v-model="username">
-        <input type="password" placeholder="password" v-model="password">
-      </fieldset>
-      <fieldset>
-        <button type="submit" class="pure-button pure-button-primary" @click.prevent="register">Register</button>
-      </fieldset>
-    </form>
-    <p v-if="error" class="error">{{error}}</p>
-    <form class="pure-form space-above">
-      <fieldset>
-        <legend class="legend">Login</legend>
-        <input placeholder="username" v-model="usernameLogin">
-        <input type="password" placeholder="password" v-model="passwordLogin">
-      </fieldset>
-      <fieldset>
-        <button type="submit" class="pure-button pure-button-primary" @click.prevent="login">Login</button>
-      </fieldset>
-    </form>
-    <p v-if="errorLogin" class="error">{{errorLogin}}</p>
+  <div class="hero">
+    <div class="heroBox">
+      <form class="pure-form">
+        <fieldset>
+          <legend class="legend">Register for an account</legend>
+          <input placeholder="first name" v-model="firstName" /><br><br>
+          <input placeholder="last name" v-model="lastName" /><br><br>
+        </fieldset>
+        <fieldset>
+          <input placeholder="age" v-model="age" /><br><br>
+          <input placeholder="email" v-model="email" /><br /><br>
+        </fieldset>
+        <fieldset>
+          <input placeholder="username" v-model="username" /><br><br>
+          <input type="password" placeholder="password" v-model="password" /><br><br>
+        </fieldset>
+        <fieldset>
+            <input placeholder="gender" v-model="gender" /><br><br>
+        </fieldset>
+        <fieldset>
+          <button
+            type="submit"
+            class="pure-button pure-button-primary"
+            @click.prevent="register"
+          >
+            Register
+          </button>
+        </fieldset>
+      </form>
+      <p v-if="error" class="error">{{ error }}</p>
+      <form class="pure-form space-above">
+        <fieldset>
+          <legend class="legend">Login</legend>
+          <input placeholder="username" v-model="usernameLogin" /><br><br>
+          <input
+            type="password"
+            placeholder="password"
+            v-model="passwordLogin"
+          />
+        </fieldset>
+        <fieldset>
+          <button
+            type="submit"
+            class="pure-button pure-button-primary"
+            @click.prevent="login"
+          >
+            Login
+          </button>
+        </fieldset>
+      </form>
+      <p v-if="errorLogin" class="error">{{ errorLogin }}</p>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'HomePage',
+  name: "HomePage",
   data() {
     return {
-      firstName: '',
-      lastName: '',
-      username: '',
-      password: '',
+      firstName: "",
+      lastName: "",
+      username: "",
+      password: "",
+      email: "",
+      age: null,
+      gender: "",
       points: 0,
-      usernameLogin: '',
-      passwordLogin: '',
-      error: '',
-      errorLogin: '',
-    }
+      usernameLogin: "",
+      passwordLogin: "",
+      error: "",
+      errorLogin: "",
+    };
   },
-    methods: {
+  methods: {
     async register() {
-      this.error = '';
-      this.errorLogin = '';
+      this.error = "";
+      this.errorLogin = "";
       if (!this.firstName || !this.lastName || !this.username || !this.password)
         return;
       try {
-        let response = await axios.post('/api/users', {
+        let response = await axios.post("/api/users", {
           firstName: this.firstName,
           lastName: this.lastName,
           username: this.username,
           password: this.password,
           points: this.points,
+          gender: this.gender,
+          age: this.age,
+          email: this.email,
         });
         this.$root.$data.user = response.data.user;
       } catch (error) {
@@ -68,13 +97,12 @@ export default {
         this.$root.$data.user = null;
       }
     },
-      async login() {
-      this.error = '';
-      this.errorLogin = '';
-      if (!this.usernameLogin || !this.passwordLogin)
-        return;
+    async login() {
+      this.error = "";
+      this.errorLogin = "";
+      if (!this.usernameLogin || !this.passwordLogin) return;
       try {
-        let response = await axios.post('/api/users/login', {
+        let response = await axios.post("/api/users/login", {
           username: this.usernameLogin,
           password: this.passwordLogin,
         });
@@ -85,16 +113,15 @@ export default {
       }
     },
   },
-}
+};
 </script>
 
 <style scoped>
-
-.legend{
-  font-size: x-large !important;
+.legend {
+  /* font-size: x-large !important; */
 }
 
-button{
+button {
   color: white;
   background-color: rgba(56, 56, 56, 0.7);
   padding: 1%;
@@ -111,7 +138,7 @@ h1 {
 }
 
 .hero {
-  padding: 120px;
+  padding: 5px;
   display: flex;
   justify-content: center;
 }

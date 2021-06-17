@@ -12,7 +12,7 @@
 
         <label for="address">Card Number: </label><br>
         <input type="text"><br>
-        <input class="submitButton" type="submit">
+        <router-link to="/Thankyou"><input class="submitButton" type="submit"></router-link>
     </form>
       </div>
   </div>
