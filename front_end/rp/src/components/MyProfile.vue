@@ -30,10 +30,6 @@
             v-for="race in this.$root.$data.user.races"
             v-bind:key="race"
           ></div>
-          <div v-if="user.races.length < 1">
-            <p>none</p>
-          </div>
-          <div v-else>
             <div v-for="racer in user.races" v-bind:key="racer._id">
               <div class="raceBoxDiv">
                 <div class="raceBoxDiv2 widthDiv">
@@ -50,7 +46,6 @@
             </div>
             <p>Total: ${{ user.points }}</p>
             <router-link to="/Payment"><button>Pay</button></router-link>
-          </div>
         </div>
       </div>
     </div>
@@ -67,7 +62,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "MyPhotos",
+  name: "MyProfile",
   data() {
     return {};
   },
