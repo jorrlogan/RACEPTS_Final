@@ -63,6 +63,21 @@ app.get('/api/races', async (req,res) => {
     }
 });
 
+app.post('/api/races', async (req, res) => {
+  try{
+    let race = new Race({
+      name: req.body.name,
+      price: req.body.price,
+      date: req.body.date,
+    });
+    await race.save();
+    res.send(race);
+  }catch(error){
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 
 
 app.listen(3005, () => console.log('Server listening on port 3005!'));
